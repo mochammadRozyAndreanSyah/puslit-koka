@@ -55,10 +55,10 @@ class Databarang_model extends CI_Model
 
 	function data($id_barang)
 	{
-		$this->db->select("barang.id_barang, barang.nama_produk , barang.jenis , barang.kategori , barang.satuan , barang.harga ");
+		$this->db->select("barang.id_barang, barang.nama_produk , barang.jenis , barang.kategori , barang.satuan , barang.harga , barang.exp , barang.stock ");
 		$this->db->from("barang");
 		$this->db->where('barang.id_barang', $id_barang);
-		// $this->db->join("detail_obat", "detail_obat.id_obat = obat.id_obat", "left");
+		// $this->db->join("detail_barang", "detail_barang.id_barang = barang.id_barang", "left");
 		$query =  $this->db->get()->result();
 
 		foreach ($query as $barang) {
@@ -69,29 +69,31 @@ class Databarang_model extends CI_Model
 				'jenis'				=> $barang->jenis,
 				'kategori'			=> $barang->kategori,
 				'satuan' 			=> $barang->satuan,
-				'harga'				=> $barang->harga
+				'harga'				=> $barang->harga,
+				'exp'				=> $exp,
+				'stock'				=> $stock
 			);
 		}
 		return $data;
 	}
 
-	// function get_exp($id_obat)
-	// {
-	// 	$this->db->order_by("exp", "ASC");
-	// 	$query = $this->db->get_where('detail_obat', array('id_obat' => $id_obat));
-	// 	return $query;
-	// }
+	function get_exp($id_barang)
+	{
+		$this->db->order_by("exp", "ASC");
+		$query = $this->db->get_where('detail_barang', array('id_barang' => $id_barang));
+		return $query;
+	}
 
-	// function get_stok($id_obat, $exp)
-	// {
-	// 	$query = $this->db->get_where('detail_obat', array('id_obat' => $id_obat, 'exp' => $exp))->result();
+	function get_stock($id_barang, $exp)
+	{
+		$query = $this->db->get_where('detail_barang', array('id_barang' => $id_barang, 'exp' => $exp))->result();
 
-	// 	foreach ($query as $key) {
-	// 		# code...
-	// 		$data = array(
-	// 			'jumlah_stok' => $key->jumlah_stok
-	// 		);
-	// 	}
-	// 	return $data;
-	// }
+		foreach ($query as $key) {
+			# code...
+			$data = array(
+				'stock' => $key->stock
+			);
+		}
+		return $data;
+	}
 }

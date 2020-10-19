@@ -34,6 +34,10 @@ class Data_barang extends CI_Controller {
 		$kategori = $this->input->post("kategori_isi");
 		$satuan = $this->input->post("satuan_isi");
 		$harga = $this->input->post("harga_isi");
+		$exp = $this->input->post("exp_isi");
+		$stock = $this->input->post("stock_isi");
+
+
 
 		$data = array(
 			'id_barang' 				=> $id_barang,
@@ -41,7 +45,9 @@ class Data_barang extends CI_Controller {
 			'jenis'						=> $jenis,
 			'kategori'					=> $kategori,
 			'satuan'					=> $satuan,
-			'harga'						=> $harga
+			'harga'						=> $harga,
+			'exp'						=> $exp,
+			'stock'						=> $stock
 		);
 
 		// echo "<pre>";
@@ -59,6 +65,8 @@ class Data_barang extends CI_Controller {
 		$kategori = $this->input->post("kategori_edit");
 		$satuan = $this->input->post("satuan_edit");
 		$harga = $this->input->post("harga_edit");
+		$exp = $this->input->post("exp_edit");
+		$stock = $this->input->post("stock_edit");
 
 		$data = array(
 			'id_barang' 				=> $id_barang,
@@ -66,17 +74,19 @@ class Data_barang extends CI_Controller {
 			'jenis'						=> $jenis,
 			'kategori'					=> $kategori,
 			'satuan'					=> $satuan,
-			'harga'						=> $harga
+			'harga'						=> $harga,
+			'exp'						=> $exp,
+			'stock'						=> $stock
 		);
 
 		$this->Databarang_model->editdata($data, $id_barang);
 		redirect("data_barang");
 	}
 
-	function hapus($hapus)
+	public function hapus($hapus)
 	{
 		$id_barang = $hapus;
-		// print_r($id_obat);
+		// print_r($id_barang);
 		$this->Databarang_model->hapusdata($id_barang);
 		redirect("data_barang");
 	}

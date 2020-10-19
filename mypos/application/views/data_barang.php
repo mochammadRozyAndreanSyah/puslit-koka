@@ -19,72 +19,23 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
                   Tambah Data
                 </button>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>ID Barang</th>
-                    <th>Nama Produk</th>
-                    <th>Kategori</th>
-                    <th>Jenis</th>
-                    <th>Satuan</th>
-                    <th>harga</th>
-                    <th>action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php foreach ($barang as $key) : ?>
-                      <tr>
-                        <td><?php echo $key->id_barang ?></td>
-                        <td><?php echo $key->nama_produk ?></td>
-                        <td><?php echo $key->jenis ?></td>
-                        <td><?php echo $key->kategori ?></td>
-                        <td><?php echo $key->satuan ?></td>
-                        <td><?php echo $key->harga ?></td>
-                        <td>
-                           <div class="form-group">
-                              <a href="#" class="btn btn-primary btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target=".bs-example-modal-lga<?php echo $key->id_barang ?>">Edit</a>
-
-                              <a id="id_barang_hapus" name="id_barang_hapus" href="#" data-toggle="modal" data-target="#delete<?php echo $key->id_barang ?>" class="btn btn-danger btn-sm glyphicon glyphicon-remove">Hapus</a>
-                            </div>
-                          </td>
-                        </tr>
-                    <?php endforeach ?>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-</div>
-<!-- ./wrapper -->
-<div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Data Barang</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
+                <!-- Tambah Data -->
+                <div class="modal fade" id="modal-lg">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Data Barang</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                <div class="modal-body">
               <!-- form start -->
               <form action="<?php echo base_url("Data_barang/tambah") ?>" method="post" class="form-horizontal form-label-left">
                 <!-- <div class="card-body"> -->
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">ID Barang</label>
-                    <input type="text" class="form-control" id="id_barang_isi" nama="id_barang_isi" value="<?php echo $kode ?>" readonly="readonly" required="required">
+                    <input type="text" class="form-control" id="id_barang_isi" name="id_barang_isi" value="<?php echo $kode ?>" readonly="readonly" required="required">
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Produk</label>
@@ -116,23 +67,27 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Harga</label>
                     <input type="number" min="0" class="form-control" id="harga_isi" name="harga_isi" placeholder="RP" required="required">
                   </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Exp</label>
+                    <input type="date" class="form-control" id="exp_isi" name="exp_isi" required="required">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Stock</label>
+                    <input type="number" min="0" class="form-control" id="stock_isi" name="stock_isi" placeholder="Stock" required="required">
+                  </div>
                   <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="reset" class="btn btn-danger">Reset</button>
               <button type="submit" class="btn btn-success">Submit</button>
             </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <!-- /.modal-content -->
+          </form>
         </div>
-        <!-- /.modal-dialog -->
       </div>
-      <!-- /.modal -->
-      <!-- Edit -->
-      <?php foreach ($barang as $key) : ?>
-      <div class="modal fade" id="modal-lg">
+    </div>
+    </div>
+    <!-- Edit Data -->
+    <?php foreach ($barang as $key) : ?>
+      <div class="modal fade" id="update<?php echo $key->id_barang ?>" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -145,7 +100,7 @@
               <form action="<?php echo base_url("Data_barang/edit") ?>" method="post" class="form-horizontal form-label-left">
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">ID Barang</label>
-                    <input type="text" class="form-control" id="id_barang_edit" nama="id_barang_edit" value="<?php echo $key->id_barang ?>" readonly="readonly" required="required">
+                    <input type="text" class="form-control" id="id_barang_edit" name="id_barang_edit" value="<?php echo $key->id_barang ?>" readonly="readonly" required="required">
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Produk</label>
@@ -161,7 +116,7 @@
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Kategori</label>
-                    <input type="text" class="form-control" id="kategori_edit" name="kategori_edit" placeholder="Kategori" required="required">
+                    <input type="text" class="form-control" id="kategori_edit" name="kategori_edit" placeholder="Kategori" required="required" value="<?php echo $key->kategori ?>">
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Satuan</label>
@@ -176,24 +131,72 @@
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Harga</label>
                     <input type="number" min="0" class="form-control" id="harga_edit" name="harga_edit" placeholder="RP" required="required" value="<?php echo $key->harga ?>">
-                  </div>   
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Exp</label>
+                    <input type="date" class="form-control" id="exp_edit" name="exp_edit" required="required" value="<?php echo $key->exp ?>">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Stock</label>
+                    <input type="number" min="0" class="form-control" id="stock_edit" name="stock_edit" placeholder="Stock" required="required" value="<?php echo $key->stock ?>">
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="reset" class="btn btn-primary">Reset</button>
+                  <button type="submit" class="btn btn-success">Submit</button>
+                  </div>
+                </form>   
             </div>
-          </form>
-          <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="reset" class="btn btn-primary">Reset</button>
-              <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-
           </div>
-
         </div>
-
       </div>
-      <?php endforeach ?>
-     <!-- Delete -->
-     <?php foreach ($barang as $key) : ?>
-        <div class="modal fade" id="delete<?php echo $key->id_barang ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <?php endforeach ?>
+  </div>
+      <!-- /.card-header -->
+       <div class="card-body">
+           <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>ID Barang</th>
+                    <th>Nama Produk</th>
+                    <th>Kategori</th>
+                    <th>Jenis</th>
+                    <th>Satuan</th>
+                    <th>harga</th>
+                    <th>action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php foreach ($barang as $key) : ?>
+                      <tr>
+                        <td><?php echo $key->id_barang ?></td>
+                        <td><?php echo $key->nama_produk ?></td>
+                        <td><?php echo $key->jenis ?></td>
+                        <td><?php echo $key->kategori ?></td>
+                        <td><?php echo $key->satuan ?></td>
+                        <td><?php echo $key->harga ?></td>
+                        <td>
+                           <div class="form-group">
+                              <a id="id_barang_edit" name="id_barang_edit" href="#" data-toggle="modal" data-target="#update<?php echo $key->id_barang ?>" class="btn btn-primary btn-sm glyphicon glyphicon-pencil">Edit</a>
+
+                              <a id="id_barang_hapus" name="id_barang_hapus" href="#" data-toggle="modal" data-target="#delete<?php echo $key->id_barang ?>" class="btn btn-danger btn-sm glyphicon glyphicon-remove">Hapus</a>
+                            </div>
+                          </td>
+                        </tr>
+                  <?php endforeach ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!-- Delete Data -->
+<?php foreach ($barang as $key) : ?>
+       <div class="modal fade" id="delete<?php echo $key->id_barang ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -210,7 +213,4 @@
             </div>
         </div>
         </div>
-     <?php endforeach ?>
-
-
-      
+<?php endforeach ?>
