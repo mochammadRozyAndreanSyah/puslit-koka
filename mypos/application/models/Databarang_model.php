@@ -70,8 +70,8 @@ class Databarang_model extends CI_Model
 				'kategori'			=> $barang->kategori,
 				'satuan' 			=> $barang->satuan,
 				'harga'				=> $barang->harga,
-				'exp'				=> $exp,
-				'stock'				=> $stock
+				'exp'				=> $barang->exp,
+				'stock'				=> $barang->stock
 			);
 		}
 		return $data;

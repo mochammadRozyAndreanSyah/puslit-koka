@@ -11,539 +11,297 @@
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Pemesanan Barang</h3>
+                <h3 class="card-title">Data Pemesanan Barang</h3>
               </div>
               <div class="clearfix">
               </div>
-              <div class="modal-body">
-              <!-- form start -->
-              <form role="form">
-                <div class="card-body">
-                  <div class="form-group">
-                    <div class="col-md-10">
-                    <label class="control-label col-md-2 col-sm-3 col-xs-12">Email address</label>
-                  </div>
-                  <div class="col-md-4 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required="required">
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-10">
-                    <label class="control-label col-md-2 col-sm-3 col-xs-12"">Password</label>
-                  </div>
-                  <div class="col-md-4 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter password" required="required">
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-10">
-                    <label class="control-label col-md-2 col-sm-3 col-xs-12">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="col-md-4 col-sm-9 col-xs-12" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+
+              <div class="card-body">
+                <form action="<?php echo base_url("Pemesanan_barang/add") ?>" method="post" role="form">
+                  <div class="row">
+                    <div class="col-sm-10">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>ID Pemensanan</label>
+                        <div class="col-md-4 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" id="id_pemesanan" name="id_pemesanan" placeholder="Enter ..." required="required">
+                        </div>
                       </div>
-                      <div class="input-group-append col-md-4 col-sm-9 col-xs-12">
-                        <span class="input-group-text" id="">Upload</span>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <label>Tanggal</label>
+                        <input type="text" class="form-control has-feedback-left" id="single_cal2" placeholder="Expired" name="tanggal" aria-describedby="inputSuccess2Status4" required="required">
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                            <span id="inputSuccess2Status4" class="sr-only">(success)</span>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
-            </div>
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>ID Customers</label>
+                        <div class="col-md-4 col-sm-7 col-xs-12">
+                        <select class="form-control" id="id_customers" name="id_customers" required>
+                              <option value="&nbsp"></option>
+                              <?php foreach ($cs as $key) : ?>
+                                <option value="<?php echo $key->id_customers ?>"><?php echo $key->id_customers ?> | <?php echo $key->nama_customers ?></option>
+
+                              <?php endforeach ?>
+                            </select>
+                        </div>
+                      </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <!-- textarea -->
+                      <div class="form-group">
+                        <label>Nama Customers</label>
+                        <input type="text" class="form-control" id="nama_cs" name="nama_cs" readonly /></input>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>alamat</label>
+                        <input type="text" class="form-control" id="alamat_cs" name="alamat_cs" readonly /></input>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>No. Telepon</label>
+                        <input type="number" class="form-control" id="no_telp_cs" name="no_telp_cs" readonly /></input>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>Alamat Tujuan</label>
+                        <input type="text" class="form-control" id="alamat_perusahaan_cs" name="alamat_perusahaan_cs" readonly /></input>
+                      </div>
+                    </div>
+                  </div>
               <div calss="card-body">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
                   Tambah Data
                 </button>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <!-- Tambah Data -->
+                <div class="modal fade" id="modal-lg">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Data Barang</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                <div class="modal-body">
+              <!-- form start -->
+              <form action="<?php echo base_url("Data_barang/tambah") ?>" method="post" class="form-horizontal form-label-left">
+                <!-- <div class="card-body"> -->
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">ID Barang</label>
+                    <select class="form-control" id="id_barang_isi" name="id_barang_isi">
+                          <option value="&nbsp"></option>
+                          <?php foreach ($id as $key) : ?>
+                            <option value="<?php echo $key->id_barang ?>"><?php echo $key->id_barang ?> | <?php echo $key->nama_produk ?></option>
+
+                          <?php endforeach ?>
+                        </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Produk</label>
+                    <input type="text" class="form-control" id="nama_produk_isi" name="nama_produk_isi" placeholder="Nama Produk" required="required" readonly="readonly">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis</label>
+                    <input type="text" class="form-control" id="jenis_isi" name="jenis_isi" placeholder="Jenis" required="required" readonly="readonly"> 
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Kategori</label>
+                    <input type="text" class="form-control" id="kategori_isi" name="kategori_isi" placeholder="Kategori" required="required" readonly="readonly">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Satuan</label>
+                    <input type="text" class="form-control" id="satuan_isi" name="satuan_isi" placeholder="Satuan" required="required" readonly="readonly"> 
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Harga</label>
+                    <input type="number" min="0" class="form-control" id="harga_isi" name="harga_isi" placeholder="RP" required="required" readonly="readonly">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Exp</label>
+                    <input type="date" class="form-control" id="exp_isi" name="exp_isi" required="required">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">jumlah</label>
+                    <input type="number" min="0" class="form-control" id="stock_isi" name="stock_isi" placeholder="Jumlah" required="required">
+                  </div>
+                  <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="reset" class="btn btn-danger">Reset</button>
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+      <!-- /.card-header -->
+       <div class="card-body">
+           <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
+                    <th>ID Barang</th>
+                    <th>Nama Produk</th>
+                    <th>Kategori</th>
+                    <th>Jenis</th>
+                    <th>Satuan</th>
+                    <th>Harga</th>
+                    <th>Exp</th>
+                    <th>jumlah</th>
+                    <th>Sub total</th>
+                    <th>action</th>
                   </tr>
                   </thead>
-                  <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.5
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5.5</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 6
-                    </td>
-                    <td>Win 98+</td>
-                    <td>6</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet Explorer 7</td>
-                    <td>Win XP SP2+</td>
-                    <td>7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>AOL browser (AOL desktop)</td>
-                    <td>Win XP</td>
-                    <td>6</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 1.0</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 1.5</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 2.0</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Firefox 3.0</td>
-                    <td>Win 2k+ / OSX.3+</td>
-                    <td>1.9</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Camino 1.0</td>
-                    <td>OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Camino 1.5</td>
-                    <td>OSX.3+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Netscape 7.2</td>
-                    <td>Win 95+ / Mac OS 8.6-9.2</td>
-                    <td>1.7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Netscape Browser 8</td>
-                    <td>Win 98SE+</td>
-                    <td>1.7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Netscape Navigator 9</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.0</td>
-                    <td>Win 95+ / OSX.1+</td>
-                    <td>1</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.1</td>
-                    <td>Win 95+ / OSX.1+</td>
-                    <td>1.1</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.2</td>
-                    <td>Win 95+ / OSX.1+</td>
-                    <td>1.2</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.3</td>
-                    <td>Win 95+ / OSX.1+</td>
-                    <td>1.3</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.4</td>
-                    <td>Win 95+ / OSX.1+</td>
-                    <td>1.4</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.5</td>
-                    <td>Win 95+ / OSX.1+</td>
-                    <td>1.5</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.6</td>
-                    <td>Win 95+ / OSX.1+</td>
-                    <td>1.6</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.7</td>
-                    <td>Win 98+ / OSX.1+</td>
-                    <td>1.7</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Mozilla 1.8</td>
-                    <td>Win 98+ / OSX.1+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Seamonkey 1.1</td>
-                    <td>Win 98+ / OSX.2+</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Gecko</td>
-                    <td>Epiphany 2.20</td>
-                    <td>Gnome</td>
-                    <td>1.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Webkit</td>
-                    <td>Safari 1.2</td>
-                    <td>OSX.3</td>
-                    <td>125.5</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Webkit</td>
-                    <td>Safari 1.3</td>
-                    <td>OSX.3</td>
-                    <td>312.8</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Webkit</td>
-                    <td>Safari 2.0</td>
-                    <td>OSX.4+</td>
-                    <td>419.3</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Webkit</td>
-                    <td>Safari 3.0</td>
-                    <td>OSX.4+</td>
-                    <td>522.1</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Webkit</td>
-                    <td>OmniWeb 5.5</td>
-                    <td>OSX.4+</td>
-                    <td>420</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Webkit</td>
-                    <td>iPod Touch / iPhone</td>
-                    <td>iPod</td>
-                    <td>420.1</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Webkit</td>
-                    <td>S60</td>
-                    <td>S60</td>
-                    <td>413</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Opera 7.0</td>
-                    <td>Win 95+ / OSX.1+</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Opera 7.5</td>
-                    <td>Win 95+ / OSX.2+</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Opera 8.0</td>
-                    <td>Win 95+ / OSX.2+</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Opera 8.5</td>
-                    <td>Win 95+ / OSX.2+</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Opera 9.0</td>
-                    <td>Win 95+ / OSX.3+</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Opera 9.2</td>
-                    <td>Win 88+ / OSX.3+</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Opera 9.5</td>
-                    <td>Win 88+ / OSX.3+</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Opera for Wii</td>
-                    <td>Wii</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Nokia N800</td>
-                    <td>N800</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Presto</td>
-                    <td>Nintendo DS browser</td>
-                    <td>Nintendo DS</td>
-                    <td>8.5</td>
-                    <td>C/A<sup>1</sup></td>
-                  </tr>
-                  <tr>
-                    <td>KHTML</td>
-                    <td>Konqureror 3.1</td>
-                    <td>KDE 3.1</td>
-                    <td>3.1</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>KHTML</td>
-                    <td>Konqureror 3.3</td>
-                    <td>KDE 3.3</td>
-                    <td>3.3</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>KHTML</td>
-                    <td>Konqureror 3.5</td>
-                    <td>KDE 3.5</td>
-                    <td>3.5</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Tasman</td>
-                    <td>Internet Explorer 4.5</td>
-                    <td>Mac OS 8-9</td>
-                    <td>-</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Tasman</td>
-                    <td>Internet Explorer 5.1</td>
-                    <td>Mac OS 7.6-9</td>
-                    <td>1</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>Tasman</td>
-                    <td>Internet Explorer 5.2</td>
-                    <td>Mac OS 8-X</td>
-                    <td>1</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>NetFront 3.1</td>
-                    <td>Embedded devices</td>
-                    <td>-</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>NetFront 3.4</td>
-                    <td>Embedded devices</td>
-                    <td>-</td>
-                    <td>A</td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>Dillo 0.8</td>
-                    <td>Embedded devices</td>
-                    <td>-</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>Links</td>
-                    <td>Text only</td>
-                    <td>-</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>Lynx</td>
-                    <td>Text only</td>
-                    <td>-</td>
-                    <td>X</td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>IE Mobile</td>
-                    <td>Windows Mobile 6</td>
-                    <td>-</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>Misc</td>
-                    <td>PSP browser</td>
-                    <td>PSP</td>
-                    <td>-</td>
-                    <td>C</td>
-                  </tr>
-                  <tr>
-                    <td>Other browsers</td>
-                    <td>All others</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>U</td>
-                  </tr>
-                  </tbody>
+                  <tbody id="pemesanan">
                 </table>
               </div>
-               <div class="form-group">
-               <div class="col-md-9 col-sm-9 col-xs-12 ">
-                  <button type="submit" id="submit" name="submit" class="btn btn-success">Submit</button>
-               </div>
-              </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+            <div class="form-group">
+              <div class="col-md-9 col-sm-9 col-xs-12 ">
+                  <button type="submit" id="submit" name="submit" class="btn btn-success">Submit</button>
+              </div>
+            </div>
+          </form>
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
   </div>
 </div>
-<!-- ./wrapper -->
-<div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Data Barang</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <!-- form start -->
-              <form role="form">
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text" id="">Upload</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-      <!-- /.modal -->
+<script src="<?=base_url()?>assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?=base_url()?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="<?=base_url()?>assets/plugins/chart.js/Chart.min.js"></script>
+<!-- DataTables -->
+<script src="<?=base_url()?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=base_url()?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?=base_url()?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?=base_url()?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?=base_url()?>assets/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?=base_url()?>assets/dist/js/demo.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+          $("#id_barang_isi").select2({
+            placeholder: "Masukkan no Kode barang",
+            allowClear: true,
+            minimumInputLength: 1
+          });
+          $("#id_customers").select2({
+            placeholder: "Masukkan ID Customers",
+            allowClear: true,
+            minimumInputLength: 1
+          });
+          $("#id_customers").on("change", function() {
+            var id_customers = $("#id_customers").val();
 
+            $.ajax({
+              url: "<?php echo base_url("pemesanan_barang/data_customers") ?>",
+              type: "POST",
+              dataType: "JSON",
+              data: {
+                id_customers: id_customers
+              },
+              cache: false,
+              success: function(data) {
+                $("#nama_cs").val(data.nama_customers);
+                $("#alamat_cs").val(data.alamat);
+                $("#no_telp_cs").val(data.no_telp);
+                $("#alamat_perusahaan_cs").val(data.alamat_perusahaan);
+              }
+            })
+          });
+
+          $("#id_barang_isi").on("change", function() {
+            var id_barang = $("#id_barang_isi").val();
+
+            $.ajax({
+              url: "<?php echo base_url("pemesanan_barang/data_barang") ?>",
+              type: "POST",
+              dataType: "JSON",
+              data: {
+                id_barang: id_barang
+              },
+              cache: false,
+              success: function(data) {
+                $("#nama_produk_isi").val(data.nama_produk);
+                $("#jenis_isi").val(data.jenis);
+                $("#kategori_isi").val(data.kategori);
+                $("#satuan_isi").val(data.satuan);
+                $("#harga_isi").val(data.harga);
+                // $("#").val(data.);
+              }
+            })
+          });
+
+          $('#add_cart').on('click', function() {
+            var barang = $("#id_barang_isi").val();
+            var nama_produk = $("#nama_produk_isi").val();
+            var qty = $("#stock_isi").val();
+            var harga = $("#harga_isi").val();
+            var jenis = $("#jenis_isi").val();
+            var kategori = $("#kategori_isi").val();
+            var satuan = $("#satuan_isi").val();
+            var exp = $("#single_cal4").val();
+
+            $.ajax({
+
+              url: "<?php echo base_url('kasir/pembelian_obat/cart'); ?>",
+              method: "POST",
+              data: {
+                barang: barang,
+                nama_produk: nama_produk,
+                qty: qty,
+                harga: harga,
+                jenis: jenis,
+                kategori: kategori,
+                satuan: satuan,
+                exp: exp
+              },
+              success: function(data) {
+                $('#pemesanan').html(data);
+                document.getElementById("id_barang_isi").value = "";
+                document.getElementById("nama_produk_isi").value = "";
+                document.getElementById("stock_isi").value = "";
+                document.getElementById("harga_isi").value = "";
+                document.getElementById("jenis_isi").value = "";
+                document.getElementById("kategori_isi").value = "";
+                document.getElementById("satuan_isi").value = "";
+              }
+            });
+          });
+        });
+
+          $('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
+
+          $(document).on('click', '#remove_cart', function() {
+            var row_id = $(this).attr("data-id");
+
+
+            $.ajax({
+              url: "<?php echo site_url('pemesanan_barang/hapus_cart'); ?>",
+              method: "POST",
+              data: {
+                row_id: row_id
+              },
+              success: function(data) {
+                $('#pembelian').html(data);
+              }
+            });
+          });
+
+
+          
+
+</script>
