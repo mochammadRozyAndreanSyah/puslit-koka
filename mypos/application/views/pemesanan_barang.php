@@ -31,9 +31,7 @@
                     <div class="col-sm-2">
                       <div class="form-group">
                         <label>Tanggal</label>
-                        <input type="text" class="form-control has-feedback-left" id="single_cal2" placeholder="Expired" name="tanggal" aria-describedby="inputSuccess2Status4" required="required">
-                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                            <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                        <input type="date" class="form-control has-feedback-left" id="single_cal2" placeholder="Expired" name="tanggal" required="required">
                       </div>
                     </div>
                   </div>
