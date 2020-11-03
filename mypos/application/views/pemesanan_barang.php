@@ -132,7 +132,7 @@
                   <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="reset" class="btn btn-danger">Reset</button>
-              <button type="button" id="modal-submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+              <button type="button" id="add_cart" class="btn btn-success" data-dismiss="modal">Submit</button>
             </div>
           <!-- </form> -->
         </div>
@@ -172,16 +172,73 @@
     </section>
   </div>
 </div>
+
+<div class="modal fade" id="modal-edit">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">Data Barang</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" class="form-control" id="edit_row_id" name="edit_row_id" required="required" readonly="readonly">
+				<div class="form-group">
+					<label class="control-label">ID Barang</label>
+					<input type="text" class="form-control" id="edit_id_barang_isi" name="edit_id_barang_isi" placeholder="ID Produk" required="required" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Produk</label>
+					<input type="text" class="form-control" id="edit_nama_produk_isi" name="edit_nama_produk_isi" placeholder="Nama Produk" required="required" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis</label>
+					<input type="text" class="form-control" id="edit_jenis_isi" name="edit_jenis_isi" placeholder="Jenis" required="required" readonly="readonly"> 
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Kategori</label>
+					<input type="text" class="form-control" id="edit_kategori_isi" name="edit_kategori_isi" placeholder="Kategori" required="required" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Satuan</label>
+					<input type="text" class="form-control" id="edit_satuan_isi" name="edit_satuan_isi" placeholder="Satuan" required="required" readonly="readonly"> 
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Harga</label>
+					<input type="text" min="0" class="form-control" id="edit_harga_isi" name="edit_harga_isi" placeholder="RP" required="required" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Exp</label>
+					<input type="date" class="form-control" id="edit_exp_isi" name="edit_exp_isi" required="required">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">jumlah</label>
+					<input type="number" min="0" class="form-control" id="edit_stock_isi" name="edit_stock_isi" placeholder="Jumlah" required="required">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="edit_data_cart" class="btn btn-success" data-dismiss="modal">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 $(document).ready(function() {
+	$('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
+
 	$("#id_barang_isi").select2({
 		placeholder: "Masukkan no Kode barang",
 		minimumInputLength: 1
 	});
+
 	$("#id_customers").select2({
 		placeholder: "Masukkan ID Customers",
 		minimumInputLength: 1
 	});
+
 	$("#id_customers").on("change", function() {
 		var id_customers = $("#id_customers").val();
 		$.ajax({
@@ -203,7 +260,6 @@ $(document).ready(function() {
 
 	$("#id_barang_isi").on("change", function() {
 		var id_barang = $("#id_barang_isi").val();
-
 		$.ajax({
 			url: "<?php echo base_url("pemesanan_barang/data_barang") ?>",
 			type: "POST",
@@ -222,37 +278,6 @@ $(document).ready(function() {
 		})
 	});
 
-//modal
-	// $("#modal-submit").on("click", function() {
-	// 	var id_barang_isi = $("#id_barang_isi").val();
-	// 	var nama_produk_isi = $("#nama_produk_isi").val();
-	// 	var jenis_isi = $("#jenis_isi").val();
-	// 	var kategori_isi = $("#kategori_isi").val();
-	// 	var satuan_isi = $("#satuan_isi").val();
-	// 	var harga_isi = $("#harga_isi").val();
-	// 	var exp_isi = $("#exp_isi").val();
-	// 	var stock_isi = $("#stock_isi").val();
-
-	// 	$.ajax({
-	// 		url: "<?php echo base_url("Data_barang/tambah") ?>",
-	// 		type: "POST",
-	// 		data: {
-	// 			id_barang_isi: id_barang_isi,
-	// 			nama_produk_isi: nama_produk_isi,
-	// 			jenis_isi: jenis_isi,
-	// 			kategori_isi: kategori_isi,
-	// 			satuan_isi: satuan_isi,
-	// 			harga_isi: harga_isi,
-	// 			exp_isi: exp_isi,
-	// 			stock_isi: stock_isi,
-	// 		},
-	// 		cache: false,
-	// 		success: function(data) {
-	// 			console.log('success')
-	// 		}
-	// 	})
-	// });
-
 	$('#add_cart').on('click', function() {
 		var barang = $("#id_barang_isi").val();
 		var nama_produk = $("#nama_produk_isi").val();
@@ -261,11 +286,10 @@ $(document).ready(function() {
 		var jenis = $("#jenis_isi").val();
 		var kategori = $("#kategori_isi").val();
 		var satuan = $("#satuan_isi").val();
-		var exp = $("#single_cal4").val();
+		var exp = $("#exp_isi").val();
 
 		$.ajax({
-
-			url: "<?php echo base_url('kasir/pembelian_obat/cart'); ?>",
+			url: "<?php echo base_url('pemesanan_barang/cart'); ?>",
 			method: "POST",
 			data: {
 				barang: barang,
@@ -278,7 +302,7 @@ $(document).ready(function() {
 				exp: exp
 			},
 			success: function(data) {
-				$('#pemesanan').html(data);
+				$('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
 				document.getElementById("id_barang_isi").value = "";
 				document.getElementById("nama_produk_isi").value = "";
 				document.getElementById("stock_isi").value = "";
@@ -291,22 +315,43 @@ $(document).ready(function() {
 	});
 });
 
-$('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
+function editCart(row, id, nama, kategori, jenis, satuan, harga, exp, qty) {edit_row_id
+	$("#edit_row_id").val(row);
+	$("#edit_id_barang_isi").val(id);
+	$("#edit_nama_produk_isi").val(nama);
+	$("#edit_stock_isi").val(qty);
+	$("#edit_harga_isi").val(harga);
+	$("#edit_jenis_isi").val(jenis);
+	$("#edit_kategori_isi").val(kategori);
+	$("#edit_satuan_isi").val(satuan);
+	$("#edit_exp_isi").val(exp);
+}
 
-$(document).on('click', '#remove_cart', function() {
-	var row_id = $(this).attr("data-id");
-
-
+$('#edit_data_cart').on('click', function() {
 	$.ajax({
-		url: "<?php echo site_url('pemesanan_barang/hapus_cart'); ?>",
+		url: "<?php echo site_url('pemesanan_barang/updatekeranjang'); ?>",
 		method: "POST",
 		data: {
-			row_id: row_id
+			rowid: $("#edit_row_id").val(),
+			qty: $("#edit_stock_isi").val(),
+			exp: $("#edit_exp_isi").val()
 		},
 		success: function(data) {
-			$('#pembelian').html(data);
+			$('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
 		}
 	});
 });
 
+function deleteCart(id) {
+	$.ajax({
+		url: "<?php echo site_url('pemesanan_barang/hapus_cart'); ?>",
+		method: "POST",
+		data: {
+			row_id: id
+		},
+		success: function(data) {
+			$('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
+		}
+	});
+}
 </script>

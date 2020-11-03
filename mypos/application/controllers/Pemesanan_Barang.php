@@ -47,7 +47,6 @@ class Pemesanan_barang extends CI_Controller {
 			'satuan'		=> $this->input->post("satuan"),
 			'exp'			=> $exp
 		);
-
 		$this->cart->insert($data);
 		echo  $this->show_cart();
 	}
@@ -69,10 +68,8 @@ class Pemesanan_barang extends CI_Controller {
 	                          <td>
 	                            <div class="form-group">
 	                              <div class="form-group">
-	                                   <button type="button" class="btn btn-primary btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target=".edit_obat' . $key['rowid'] . '"></button>
-
-
-	                                   <button type="button" class="btn btn-danger btn-sm glyphicon glyphicon-remove " id="remove_cart" data-id="' . $key['rowid'] . '"></button>
+	                                   <button type="button" class="btn btn-primary btn-block glyphicon glyphicon-pencil" data-toggle="modal" data-target="#modal-edit" data-toggle="modal" data-target=".edit_obat' . $key['rowid'] . '" onclick="editCart(`'. $key['rowid'] .'`, `'. $key['id'] .'`, `'. $key['name'] .'`, `'. $key['kategori'] .'`, `'. $key['jenis'] .'`, `'. $key['satuan'] .'`, `'. number_format($key['price']) .'`, `'. $key['exp'] .'`, `'. $key['qty'] .'`)">Edit</button>
+	                                   <button type="button" class="btn btn-danger btn-block glyphicon glyphicon-remove " id="remove_cart" onclick="deleteCart(`'.$key['rowid'].'`)" data-id="' . $key['rowid'] . '">Hapus</button>
 	                            </div>
 	                          </td>
 	                        </tr>';
@@ -108,7 +105,6 @@ class Pemesanan_barang extends CI_Controller {
 	function hapus_cart()
 	{
 		$rowid	= $this->input->post('row_id');
-
 		$data 	= array(
 			'rowid' 	=> $rowid,
 			'qty'		=> 0
@@ -120,7 +116,6 @@ class Pemesanan_barang extends CI_Controller {
 	function add()
 	{
 		$id_pemesanan 	= $this->input->post("id_pemesanan");
-		// $id_user		= $this->session->userdata("id_user");
 		$id_customers 	= $this->input->post("id_customers");
 		$tgl 			= $this->input->post("tanggal");
 		$tanggal 		= date("Y-m-d", strtotime($tgl));
