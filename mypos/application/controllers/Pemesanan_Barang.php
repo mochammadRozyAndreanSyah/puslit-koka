@@ -17,7 +17,6 @@ class Pemesanan_barang extends CI_Controller {
 		
 		$this->load->view('partial/head.php');
 		$this->load->view('partial/navbar.php');
-		
 		$this->load->view('partial/sidebar.php');
 		$this->load->view('pemesanan_barang', $data);
 		$this->load->view('partial/footer.php');

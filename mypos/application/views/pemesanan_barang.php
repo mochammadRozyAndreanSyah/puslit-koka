@@ -41,13 +41,12 @@
                       <div class="form-group">
                         <label>ID Customers</label>
                         <div class="col-md-4 col-sm-7 col-xs-12">
-                        <select class="form-control" id="id_customers" name="id_customers" required>
-                              <option value="&nbsp"></option>
-                              <?php foreach ($cs as $key) : ?>
-                                <option value="<?php echo $key->id_customers ?>"><?php echo $key->id_customers ?> | <?php echo $key->nama_customers ?></option>
-
-                              <?php endforeach ?>
-                            </select>
+													<select class="select2 form-control" id="id_customers" name="id_customers" required>
+														<option value="&nbsp"></option>
+														<?php foreach ($cs as $key) : ?>
+															<option value="<?php echo $key->id_customers ?>"><?php echo $key->id_customers ?> | <?php echo $key->nama_customers ?></option>
+														<?php endforeach ?>
+													</select>
                         </div>
                       </div>
                   <div class="row">
@@ -93,17 +92,16 @@
                       </div>
                 <div class="modal-body">
               <!-- form start -->
-              <form action="<?php echo base_url("Data_barang/tambah") ?>" method="post" class="form-horizontal form-label-left">
+              <!-- <form action="<?php echo base_url("Data_barang/tambah") ?>" method="post" class="form-horizontal form-label-left"> -->
                 <!-- <div class="card-body"> -->
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">ID Barang</label>
-                    <select class="form-control" id="id_barang_isi" name="id_barang_isi">
-                          <option value="&nbsp"></option>
-                          <?php foreach ($id as $key) : ?>
-                            <option value="<?php echo $key->id_barang ?>"><?php echo $key->id_barang ?> | <?php echo $key->nama_produk ?></option>
-
-                          <?php endforeach ?>
-                        </select>
+										<label class="control-label">ID Barang</label>
+										<select class="form-control" style="width: 100%;" id="id_barang_isi" name="id_barang_isi">
+											<option value="&nbsp"></option>
+											<?php foreach ($id as $key) : ?>
+												<option value="<?php echo $key->id_barang ?>"><?php echo $key->id_barang ?> | <?php echo $key->nama_produk ?></option>
+											<?php endforeach ?>
+										</select>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Produk</label>
@@ -136,9 +134,9 @@
                   <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="reset" class="btn btn-danger">Reset</button>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button type="button" id="modal-submit" class="btn btn-success" data-dismiss="modal">Submit</button>
             </div>
-          </form>
+          <!-- </form> -->
         </div>
       </div>
     </div>
@@ -176,132 +174,141 @@
     </section>
   </div>
 </div>
-<script src="<?=base_url()?>assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<?=base_url()?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?=base_url()?>assets/plugins/chart.js/Chart.min.js"></script>
-<!-- DataTables -->
-<script src="<?=base_url()?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?=base_url()?>assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url()?>assets/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?=base_url()?>assets/dist/js/demo.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
-          $("#id_barang_isi").select2({
-            placeholder: "Masukkan no Kode barang",
-            allowClear: true,
-            minimumInputLength: 1
-          });
-          $("#id_customers").select2({
-            placeholder: "Masukkan ID Customers",
-            allowClear: true,
-            minimumInputLength: 1
-          });
-          $("#id_customers").on("change", function() {
-            var id_customers = $("#id_customers").val();
+	$("#id_barang_isi").select2({
+		placeholder: "Masukkan no Kode barang",
+		minimumInputLength: 1
+	});
+	$("#id_customers").select2({
+		placeholder: "Masukkan ID Customers",
+		minimumInputLength: 1
+	});
+	$("#id_customers").on("change", function() {
+		var id_customers = $("#id_customers").val();
+		$.ajax({
+			url: "<?php echo base_url("pemesanan_barang/data_customers") ?>",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				id_customers: id_customers
+			},
+			cache: false,
+			success: function(data) {
+				$("#nama_cs").val(data.nama_customers);
+				$("#alamat_cs").val(data.alamat);
+				$("#no_telp_cs").val(data.no_telp);
+				$("#alamat_perusahaan_cs").val(data.alamat_perusahaan);
+			}
+		})
+	});
 
-            $.ajax({
-              url: "<?php echo base_url("pemesanan_barang/data_customers") ?>",
-              type: "POST",
-              dataType: "JSON",
-              data: {
-                id_customers: id_customers
-              },
-              cache: false,
-              success: function(data) {
-                $("#nama_cs").val(data.nama_customers);
-                $("#alamat_cs").val(data.alamat);
-                $("#no_telp_cs").val(data.no_telp);
-                $("#alamat_perusahaan_cs").val(data.alamat_perusahaan);
-              }
-            })
-          });
+	$("#id_barang_isi").on("change", function() {
+		var id_barang = $("#id_barang_isi").val();
 
-          $("#id_barang_isi").on("change", function() {
-            var id_barang = $("#id_barang_isi").val();
+		$.ajax({
+			url: "<?php echo base_url("pemesanan_barang/data_barang") ?>",
+			type: "POST",
+			dataType: "JSON",
+			data: {
+				id_barang: id_barang
+			},
+			cache: false,
+			success: function(data) {
+				$("#nama_produk_isi").val(data.nama_produk);
+				$("#jenis_isi").val(data.jenis);
+				$("#kategori_isi").val(data.kategori);
+				$("#satuan_isi").val(data.satuan);
+				$("#harga_isi").val(data.harga);
+			}
+		})
+	});
 
-            $.ajax({
-              url: "<?php echo base_url("pemesanan_barang/data_barang") ?>",
-              type: "POST",
-              dataType: "JSON",
-              data: {
-                id_barang: id_barang
-              },
-              cache: false,
-              success: function(data) {
-                $("#nama_produk_isi").val(data.nama_produk);
-                $("#jenis_isi").val(data.jenis);
-                $("#kategori_isi").val(data.kategori);
-                $("#satuan_isi").val(data.satuan);
-                $("#harga_isi").val(data.harga);
-                // $("#").val(data.);
-              }
-            })
-          });
+//modal
+	// $("#modal-submit").on("click", function() {
+	// 	var id_barang_isi = $("#id_barang_isi").val();
+	// 	var nama_produk_isi = $("#nama_produk_isi").val();
+	// 	var jenis_isi = $("#jenis_isi").val();
+	// 	var kategori_isi = $("#kategori_isi").val();
+	// 	var satuan_isi = $("#satuan_isi").val();
+	// 	var harga_isi = $("#harga_isi").val();
+	// 	var exp_isi = $("#exp_isi").val();
+	// 	var stock_isi = $("#stock_isi").val();
 
-          $('#add_cart').on('click', function() {
-            var barang = $("#id_barang_isi").val();
-            var nama_produk = $("#nama_produk_isi").val();
-            var qty = $("#stock_isi").val();
-            var harga = $("#harga_isi").val();
-            var jenis = $("#jenis_isi").val();
-            var kategori = $("#kategori_isi").val();
-            var satuan = $("#satuan_isi").val();
-            var exp = $("#single_cal4").val();
+	// 	$.ajax({
+	// 		url: "<?php echo base_url("Data_barang/tambah") ?>",
+	// 		type: "POST",
+	// 		data: {
+	// 			id_barang_isi: id_barang_isi,
+	// 			nama_produk_isi: nama_produk_isi,
+	// 			jenis_isi: jenis_isi,
+	// 			kategori_isi: kategori_isi,
+	// 			satuan_isi: satuan_isi,
+	// 			harga_isi: harga_isi,
+	// 			exp_isi: exp_isi,
+	// 			stock_isi: stock_isi,
+	// 		},
+	// 		cache: false,
+	// 		success: function(data) {
+	// 			console.log('success')
+	// 		}
+	// 	})
+	// });
 
-            $.ajax({
+	$('#add_cart').on('click', function() {
+		var barang = $("#id_barang_isi").val();
+		var nama_produk = $("#nama_produk_isi").val();
+		var qty = $("#stock_isi").val();
+		var harga = $("#harga_isi").val();
+		var jenis = $("#jenis_isi").val();
+		var kategori = $("#kategori_isi").val();
+		var satuan = $("#satuan_isi").val();
+		var exp = $("#single_cal4").val();
 
-              url: "<?php echo base_url('kasir/pembelian_obat/cart'); ?>",
-              method: "POST",
-              data: {
-                barang: barang,
-                nama_produk: nama_produk,
-                qty: qty,
-                harga: harga,
-                jenis: jenis,
-                kategori: kategori,
-                satuan: satuan,
-                exp: exp
-              },
-              success: function(data) {
-                $('#pemesanan').html(data);
-                document.getElementById("id_barang_isi").value = "";
-                document.getElementById("nama_produk_isi").value = "";
-                document.getElementById("stock_isi").value = "";
-                document.getElementById("harga_isi").value = "";
-                document.getElementById("jenis_isi").value = "";
-                document.getElementById("kategori_isi").value = "";
-                document.getElementById("satuan_isi").value = "";
-              }
-            });
-          });
-        });
+		$.ajax({
 
-          $('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
+			url: "<?php echo base_url('kasir/pembelian_obat/cart'); ?>",
+			method: "POST",
+			data: {
+				barang: barang,
+				nama_produk: nama_produk,
+				qty: qty,
+				harga: harga,
+				jenis: jenis,
+				kategori: kategori,
+				satuan: satuan,
+				exp: exp
+			},
+			success: function(data) {
+				$('#pemesanan').html(data);
+				document.getElementById("id_barang_isi").value = "";
+				document.getElementById("nama_produk_isi").value = "";
+				document.getElementById("stock_isi").value = "";
+				document.getElementById("harga_isi").value = "";
+				document.getElementById("jenis_isi").value = "";
+				document.getElementById("kategori_isi").value = "";
+				document.getElementById("satuan_isi").value = "";
+			}
+		});
+	});
+});
 
-          $(document).on('click', '#remove_cart', function() {
-            var row_id = $(this).attr("data-id");
+$('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
 
-
-            $.ajax({
-              url: "<?php echo site_url('pemesanan_barang/hapus_cart'); ?>",
-              method: "POST",
-              data: {
-                row_id: row_id
-              },
-              success: function(data) {
-                $('#pembelian').html(data);
-              }
-            });
-          });
+$(document).on('click', '#remove_cart', function() {
+	var row_id = $(this).attr("data-id");
 
 
-          
+	$.ajax({
+		url: "<?php echo site_url('pemesanan_barang/hapus_cart'); ?>",
+		method: "POST",
+		data: {
+			row_id: row_id
+		},
+		success: function(data) {
+			$('#pembelian').html(data);
+		}
+	});
+});
 
 </script>
