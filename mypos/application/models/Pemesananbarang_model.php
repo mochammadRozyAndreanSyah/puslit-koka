@@ -32,7 +32,7 @@ class Pemesananbarang_model extends CI_Model
         return $data;
     }
 
-    function add_to_cart($data)
+    function add($data)
     {
         $this->db->insert("pemesanan", $data);
     }
@@ -42,17 +42,17 @@ class Pemesananbarang_model extends CI_Model
         $this->db->insert("detail_pemesanan", $data_detail_pemesanan);
     }
 
-    // function pemesanan_data()
-    // {
-    //     return $this->db->get("pemesanan")->result();
-    // }
+    function pemesanan_data()
+    {
+        return $this->db->get("pemesanan")->result();
+    }
 
-    // function pemesanan_detail()
-    // {
-    //     $this->db->from("detail_pemesanan");
-    //     $this->db->join("barang", "barang.id_barang = detail_pemesanan.id_barang", "LEFT");
-    //     return $this->db->get()->result();
-    // }
+    function pemesanan_detail()
+    {
+        $this->db->from("detail_pemesanan");
+        $this->db->join("barang", "barang.id_barang = detail_pemesanan.id_barang", "LEFT");
+        return $this->db->get()->result();
+    }
 
     function get_customers()
     {
@@ -76,9 +76,31 @@ class Pemesananbarang_model extends CI_Model
         return $data;
     }
 
+    function count($id_barang, $exp)
+    {
+        return $this->db->query("SELECT COUNT('stock') FROM barang WHERE id_barang = '$id_barang' AND exp = '$exp'")->result_array();
+    }
+
     function get_id()
     {
         return $this->db->get('barang')->result();
+    }
+
+    function get_id_where($where)
+    {
+        $this->db->where($where);
+        return $this->db->get('barang')->result();
+    }
+
+    function update_detail($data_detail, $where)
+    {
+        $this->db->where($where);
+        $this->db->update('barang', $data_detail);
+    }
+
+    function add_detail($data_detail)
+    {
+        $this->db->insert('barang', $data_detail);
     }
   
 }

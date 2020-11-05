@@ -93,13 +93,13 @@
               <!-- <form action="<?php echo base_url("Data_barang/tambah") ?>" method="post" class="form-horizontal form-label-left"> -->
                 <!-- <div class="card-body"> -->
                   <div class="form-group">
-					<label class="control-label">ID Barang</label>
-					<select class="form-control" style="width: 100%;" id="id_barang_isi" name="id_barang_isi">
-						<option value="&nbsp"></option>
-						<?php foreach ($id as $key) : ?>
-							<option value="<?php echo $key->id_barang ?>"><?php echo $key->id_barang ?> | <?php echo $key->nama_produk ?></option>
-						<?php endforeach ?>
-					</select>
+										<label class="control-label">ID Barang</label>
+										<select class="form-control" style="width: 100%;" id="id_barang_isi" name="id_barang_isi">
+											<option value="&nbsp"></option>
+											<?php foreach ($id as $key) : ?>
+												<option value="<?php echo $key->id_barang ?>"><?php echo $key->id_barang ?> | <?php echo $key->nama_produk ?></option>
+											<?php endforeach ?>
+										</select>
                   </div>
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Produk</label>
@@ -145,9 +145,9 @@
                   <thead>
                   <tr>
                     <th>ID Barang</th>
-					<th>Nama Produk</th>
-					<th>Jenis</th>
+                    <th>Nama Produk</th>
                     <th>Kategori</th>
+                    <th>Jenis</th>
                     <th>Satuan</th>
                     <th>Harga</th>
                     <th>Exp</th>
@@ -171,6 +171,58 @@
       </div>
     </section>
   </div>
+</div>
+
+<div class="modal fade" id="modal-edit">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">Data Barang</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" class="form-control" id="edit_row_id" name="edit_row_id" required="required" readonly="readonly">
+				<div class="form-group">
+					<label class="control-label">ID Barang</label>
+					<input type="text" class="form-control" id="edit_id_barang_isi" name="edit_id_barang_isi" placeholder="ID Produk" required="required" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Produk</label>
+					<input type="text" class="form-control" id="edit_nama_produk_isi" name="edit_nama_produk_isi" placeholder="Nama Produk" required="required" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis</label>
+					<input type="text" class="form-control" id="edit_jenis_isi" name="edit_jenis_isi" placeholder="Jenis" required="required" readonly="readonly"> 
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Kategori</label>
+					<input type="text" class="form-control" id="edit_kategori_isi" name="edit_kategori_isi" placeholder="Kategori" required="required" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Satuan</label>
+					<input type="text" class="form-control" id="edit_satuan_isi" name="edit_satuan_isi" placeholder="Satuan" required="required" readonly="readonly"> 
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Harga</label>
+					<input type="text" min="0" class="form-control" id="edit_harga_isi" name="edit_harga_isi" placeholder="RP" required="required" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">Exp</label>
+					<input type="date" class="form-control" id="edit_exp_isi" name="edit_exp_isi" required="required">
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12">jumlah</label>
+					<input type="number" min="0" class="form-control" id="edit_stock_isi" name="edit_stock_isi" placeholder="Jumlah" required="required">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="edit_data_cart" class="btn btn-success" data-dismiss="modal">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
@@ -227,27 +279,27 @@ $(document).ready(function() {
 	});
 
 	$('#add_cart').on('click', function() {
-		var id_barang = $("#id_barang_isi").val();
+		var barang = $("#id_barang_isi").val();
 		var nama_produk = $("#nama_produk_isi").val();
+		var qty = $("#stock_isi").val();
+		var harga = $("#harga_isi").val();
 		var jenis = $("#jenis_isi").val();
 		var kategori = $("#kategori_isi").val();
 		var satuan = $("#satuan_isi").val();
-		var harga = $("#harga_isi").val();
 		var exp = $("#exp_isi").val();
-		var qty = $('#' + id_barang).val();
 
 		$.ajax({
 			url: "<?php echo base_url('pemesanan_barang/cart'); ?>",
 			method: "POST",
 			data: {
-				id_barang: barang,
+				barang: barang,
 				nama_produk: nama_produk,
+				qty: qty,
+				harga: harga,
 				jenis: jenis,
 				kategori: kategori,
 				satuan: satuan,
-				harga: harga,
-				exp: exp,
-				qty: qty
+				exp: exp
 			},
 			success: function(data) {
 				$('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
@@ -260,6 +312,33 @@ $(document).ready(function() {
 				document.getElementById("satuan_isi").value = "";
 			}
 		});
+	});
+});
+
+function editCart(row, id, nama, kategori, jenis, satuan, harga, exp, qty) {edit_row_id
+	$("#edit_row_id").val(row);
+	$("#edit_id_barang_isi").val(id);
+	$("#edit_nama_produk_isi").val(nama);
+	$("#edit_stock_isi").val(qty);
+	$("#edit_harga_isi").val(harga);
+	$("#edit_jenis_isi").val(jenis);
+	$("#edit_kategori_isi").val(kategori);
+	$("#edit_satuan_isi").val(satuan);
+	$("#edit_exp_isi").val(exp);
+}
+
+$('#edit_data_cart').on('click', function() {
+	$.ajax({
+		url: "<?php echo site_url('pemesanan_barang/updatekeranjang'); ?>",
+		method: "POST",
+		data: {
+			rowid: $("#edit_row_id").val(),
+			qty: $("#edit_stock_isi").val(),
+			exp: $("#edit_exp_isi").val()
+		},
+		success: function(data) {
+			$('#pemesanan').load("<?php echo base_url('pemesanan_barang/load_cart'); ?>");
+		}
 	});
 });
 
