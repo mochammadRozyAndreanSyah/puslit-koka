@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2020 at 06:53 AM
+-- Generation Time: Nov 16, 2020 at 04:13 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -45,7 +45,8 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`id_barang`, `nama_produk`, `jenis`, `kategori`, `satuan`, `harga`, `exp`, `stock`) VALUES
 ('KK0001', 'hibiro 1', 'Kopi', 'arabika', 'Butir', 500, '2020-10-19', 10000),
-('KK0002', 'hibiro 2', 'Kopi', 'liberika', 'Butir', 900, '2020-10-20', 120);
+('KK0002', 'hibiro 2', 'Kopi', 'liberika', 'Butir', 900, '2020-10-20', 120),
+('KK0003', 'hibiro 3', 'Kopi', 'liberika', 'Butir', 500, '2020-11-06', 10000);
 
 -- --------------------------------------------------------
 
@@ -86,6 +87,24 @@ CREATE TABLE `detail_pemesanan` (
   `subtotal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `detail_pemesanan`
+--
+
+INSERT INTO `detail_pemesanan` (`id_det_pemesanan`, `id_pemesanan`, `id_barang`, `qty`, `exp`, `harga`, `subtotal`) VALUES
+(1, 'lop', 'KK0002', 145, '2020-11-06', 900, 130500),
+(2, 'momon', 'KK0002', 145, '2020-11-06', 900, 130500),
+(3, 'luda', 'KK0002', 145, '2020-11-06', 900, 130500),
+(4, 'luda', 'KK0001', 245, '2020-11-06', 500, 122500),
+(5, 'lo-01', 'KK0001', 20, '2020-11-06', 500, 10000),
+(6, 'lo-01', 'KK0002', 9000, '2020-11-06', 900, 8100000),
+(7, 'JL-01', 'KK0003', 200, '2020-11-06', 500, 100000),
+(8, 'JL-01', 'KK0001', 9000, '2020-11-06', 500, 4500000),
+(9, 'JL-01', 'KK0002', 1000, '2020-11-06', 900, 900000),
+(10, 'po01', 'KK0003', 129, '2020-11-12', 500, 64500),
+(11, 'lok', 'KK0003', 1200, '2020-11-13', 500, 600000),
+(12, 'lok', 'KK0002', 2000, '2020-11-13', 900, 1800000);
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +117,22 @@ CREATE TABLE `pemesanan` (
   `tanggal` date DEFAULT NULL,
   `total_harga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pemesanan`
+--
+
+INSERT INTO `pemesanan` (`id_pemesanan`, `id_customers`, `tanggal`, `total_harga`) VALUES
+('11', 'CS0002', '1970-01-01', 0),
+('12', 'CS0001', '1970-01-01', 0),
+('JL-01', 'CS0001', '2020-11-05', 5500000),
+('lo-01', 'CS0001', '2020-11-06', 8110000),
+('lok', 'CS0001', '2020-11-13', 2400000),
+('loloko', 'CS0001', '1970-01-01', 0),
+('lop', 'CS0001', '2020-11-06', 228000),
+('luda', 'CS0001', '2020-11-06', 253000),
+('momon', 'CS0001', '2020-11-06', 228000),
+('po01', 'CS0002', '2020-11-12', 64500);
 
 --
 -- Indexes for dumped tables
@@ -138,24 +173,7 @@ ALTER TABLE `pemesanan`
 -- AUTO_INCREMENT for table `detail_pemesanan`
 --
 ALTER TABLE `detail_pemesanan`
-  MODIFY `id_det_pemesanan` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `detail_pemesanan`
---
-ALTER TABLE `detail_pemesanan`
-  ADD CONSTRAINT `detail_pemesanan_ibfk_1` FOREIGN KEY (`id_pemesanan`) REFERENCES `pemesanan` (`id_pemesanan`),
-  ADD CONSTRAINT `detail_pemesanan_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`);
-
---
--- Constraints for table `pemesanan`
---
-ALTER TABLE `pemesanan`
-  ADD CONSTRAINT `pemesanan_ibfk_1` FOREIGN KEY (`id_customers`) REFERENCES `customers` (`id_customers`);
+  MODIFY `id_det_pemesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
