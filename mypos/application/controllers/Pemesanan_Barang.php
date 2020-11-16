@@ -146,61 +146,61 @@ class Pemesanan_barang extends CI_Controller {
 						'subtotal'			=> $key['subtotal']
 					);
 					$this->Pemesananbarang_model->add_detail_pemesanan($data_detail_pemesanan);
-					foreach ($count as $con) {
-						if ($con['jml'] > 0) {
-							$where = array('id_barang' => $key['id'], 'exp'	=> $key['exp']);
-							foreach ($this->Pemesananbarang_model->get_id_where($where) as $w) {
-								$stock 	= $w->stock + $key['qty'];
+					// foreach ($count as $con) {
+						// if ($con['qty'] > 0) {
+						// 	$where = array('id_barang' => $key['id'], 'exp'	=> $key['exp']);
+						// 	foreach ($this->Pemesananbarang_model->get_id_where($where) as $w) {
+						// 		$stock 	= $w->stock + $key['qty'];
 
-								$data_detail 	= array(
-									'id_barang'			=> $key['id'],
-									'exp'				=> $key['exp'],
-									'stock'				=> $stock,
-								);
+						// 		$data_detail 	= array(
+						// 			'id_barang'			=> $key['id'],
+						// 			'exp'				=> $key['exp'],
+						// 			'stock'				=> $stock,
+						// 		);
 
-								echo "<pre>";
-								print_r($data_detail);
-								echo $stock . '' . 'a';
-								echo "</pre>";
+						// 		echo "<pre>";
+						// 		print_r($data_detail);
+						// 		echo $stock . '' . 'a';
+						// 		echo "</pre>";
 
-								$where = array('id_barang' => $key['id'], 'exp'	=> $key['exp']);
-								$this->Pemesananbarang_model->update_detail($data_detail, $where);
-							}
-						} else {
-							$data_detail 	= array(
-								'id_barang'			=> $key['id'],
-								'exp'				=> $key['exp'],
-								'stock'				=> $key['qty']
-							);
-							$this->Pemesananbarang_model->add_detail($data_detail);
-						}
+						// 		$where = array('id_barang' => $key['id'], 'exp'	=> $key['exp']);
+						// 		$this->Pemesananbarang_model->update_detail($data_detail, $where);
+						// 	}
+						// } else {
+						// 	$data_detail 	= array(
+						// 		'id_barang'			=> $key['id'],
+						// 		'exp'				=> $key['exp'],
+						// 		'stock'				=> $key['qty']
+						// 	);
+						// 	$this->Pemesananbarang_model->add_detail($data_detail);
+						// }
 					}
 				}
 				$this->cart->destroy();
 				redirect("pemesanan_barang");
-			} else {
-				foreach ($this->cart->contents() as $key) {
-					# code...
-					$where = array('id_barang' => $key['id']);
-					$data_detail_pemesanan 	= array(
-						'id_barang'			=> $key['id'],
-						'id_pemesanan'		=> $id_pemesanan,
-						'qty'				=> $key['qty'],
-						'exp'				=> $key['exp'],
-						'harga'				=> $key['price'],
-						'subtotal'			=> $key['subtotal']
-					);
-					$this->Pemesananbarang_model->add_detail_pembelian($data_detail_pemesanan);
-					$data_detail 	= array(
-						'id_barang'		=> $key['id'],
-						'exp'			=> $key['exp'],
-						'stock'	=> $key['qty'],
-					);
-					$this->Pemesananbarang_model->add_detail($data_detail);
-				}
-				$this->cart->destroy();
-				redirect("pemesanan_barang");
-			}
+			// } else {
+			// 	foreach ($this->cart->contents() as $key) {
+			// 		# code...
+			// 		$where = array('id_barang' => $key['id']);
+			// 		$data_detail_pemesanan 	= array(
+			// 			'id_barang'			=> $key['id'],
+			// 			'id_pemesanan'		=> $id_pemesanan,
+			// 			'qty'				=> $key['qty'],
+			// 			'exp'				=> $key['exp'],
+			// 			'harga'				=> $key['price'],
+			// 			'subtotal'			=> $key['subtotal']
+			// 		);
+			// 		$this->Pemesananbarang_model->add_detail_pemesanan($data_detail_pemesanan);
+			// 		$data_detail 	= array(
+			// 			'id_barang'		=> $key['id'],
+			// 			'exp'			=> $key['exp'],
+			// 			'stock'	=> $key['qty'],
+			// 		);
+			// 		$this->Pemesananbarang_model->add_detail($data_detail);
+			// 	}
+			// 	$this->cart->destroy();
+			// 	redirect("pemesanan_barang");
+			// }
 		}
 	}
 

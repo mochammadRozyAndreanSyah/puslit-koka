@@ -17,7 +17,7 @@
               </div>
 
               <div class="card-body">
-                <form action="<?php echo base_url("Pemesanan_barang/add") ?>" method="post" role="form">
+                <form name="myform" novalidate action="<?php echo base_url("Pemesanan_barang/add") ?>" method="post" role="form">
                   <div class="row">
                     <div class="col-sm-10">
                       <!-- text input -->

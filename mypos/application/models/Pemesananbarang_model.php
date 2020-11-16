@@ -98,9 +98,9 @@ class Pemesananbarang_model extends CI_Model
         $this->db->update('barang', $data_detail);
     }
 
-    function add_detail($data_detail)
-    {
-        $this->db->insert('barang', $data_detail);
-    }
+    // function add_detail($data_detail)
+    // {
+    //     $this->db->insert('barang', $data_detail);
+    // }
   
 }
