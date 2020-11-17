@@ -41,7 +41,7 @@ class Data_pemesanan extends CI_Controller {
             'detail_pemesanan.id_pemesanan' => $id
         ];
 
-		$data['trans'] = $this->Datapemesanan_model->pemesanan_detail($id);
+		$data['trans'] = $this->Datapemesanan_model->pemesanan_detail_new($id);
         $data['id_pemesanan'] = $id;
 
         // $data['total_bayar'] = $get->total_bayar;

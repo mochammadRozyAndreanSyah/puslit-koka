@@ -17,7 +17,13 @@ class Datapemesanan_Model extends CI_Model
         return $this->db->get("pemesanan")->result();
     }
 
-    function pemesanan_detail($id)
+    function pemesanan_detail() {
+        $this->db->from("detail_pemesanan");
+        $this->db->join("barang", "barang.id_barang = detail_pemesanan.id_barang", "LEFT");
+        return $this->db->get()->result();
+    }
+
+    function pemesanan_detail_new($id)
     {   
         return $this->db->query("SELECT 
             barang.nama_produk, barang.jenis, barang.kategori, barang.satuan, detail_pemesanan.* 
