@@ -53,11 +53,12 @@
             </thead>       
                 <tbody>
                 <?php
+                $totalHarga = 0;
                 $no = 1; foreach ($trans as $t): ?> 
                     <tr>
                         <td style=text-align:center;><?= $no++ ?>.</td>
                         <td style=text-align:left;><?php echo $t->id_barang?></td>
-                        <td style=text-align:left;><?php echo $t->nama_barang?></td>
+                        <td style=text-align:left;><?php echo $t->nama_produk?></td>
                         <td style=text-align:left;><?php echo $t->kategori?></td>
                         <td style=text-align:left;><?php echo $t->jenis?></td>
                         <td style=text-align:left;><?php echo $t->satuan?></td>
@@ -65,11 +66,11 @@
                         <td style=text-align:center;><?php echo $t->harga?></td>
                         <td style=text-align:right;><?php echo $t->subtotal?></td>
                     </tr>
-                    <?php endforeach  ?>      
+                    <?php $totalHarga += $t->subtotal; endforeach ?>      
                 </tbody>
                     <tr>         
                         <th style="text-align:right;" colspan="4">Total :</th>
-                        <th style="text-align:right;" colspan="2">Rp. <?php echo $t->total_harga?></th>
+                        <th style="text-align:right;" colspan="2">Rp. <?php echo $totalHarga?></th>
 
                     </tr>
                     <!-- <tr>         
@@ -87,12 +88,12 @@
             <table width="100%" cellspacing="0">
                 <tr>
                     <th>No Nota</th>
-                    <td>: <?php echo $trans[0]->id_pemesanan?></td>
+                    <td>: <?php echo $id_pemesanan?></td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th>Tanggal</th>
                     <td>: <?php echo $trans[0]->tanggal?></td>
-                </tr>
+                </tr> -->
                 <!-- <tr>
                     <th>Kasir</th>
                     <td>: <?= $this->session->userdata('username'); ?></td>

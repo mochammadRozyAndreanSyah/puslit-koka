@@ -28,20 +28,21 @@ class Data_pemesanan extends CI_Controller {
 
 
 	}
-	public function print()
+	public function print($id)
     {
-        $id = $this->uri->segment(4);
+        // $id = $this->uri->segment(4);
         $get = $this->Datapemesanan_model->get_where_trans('pemesanan', array('pemesanan.id_pemesanan' => $id))->row();
         $data['get_det'] = $this->Datapemesanan_model->get_detail_trans(array('detail_pemesanan.id_pemesanan' => $id), 'detail_pemesanan')->result();
 
-        $data['id_pemesanan'] = $get->id_pemesanan;
+        // $data['id_pemesanan'] = $get->id_pemesanan;
         $data['tanggal'] = $get->tanggal;
         $data['total_harga'] = $get->total_harga;
          $halo = [
             'detail_pemesanan.id_pemesanan' => $id
         ];
 
-        $data['trans'] = $this->Datapemesanan_model->pemesanan_detail($halo, 'detail_pemesanan')->result();
+		$data['trans'] = $this->Datapemesanan_model->pemesanan_detail($id);
+        $data['id_pemesanan'] = $id;
 
         // $data['total_bayar'] = $get->total_bayar;
         // $data['kembalian'] = $get->kembalian;
