@@ -42,14 +42,13 @@
                <thead>
                 <tr>
                     <th style=text-align:center;>No</th>
-                    <th style=text-align:left;>ID Barang</th>
-                    <th style=text-align:left;>Nama Produk</th>
-                    <th style=text-align:left;>Kategori</th>
-                    <th style=text-align:left;>Jenis</th>
-                    <th style=text-align:left;>Satuan</th>
-                    <th style=text-align:left;>Jumlah</th>
-                    <th style=text-align:center;>Harga</th>
-                    <th style=text-align:right;> Sub Total</th>
+                    <th style=text-align:left;>ID Pembayaran</th>
+                    <th style=text-align:left;>Tanggal Pembayaran</th>
+                    <th style=text-align:left;> Potongan </th>
+                    <th style=text-align:right;>Status Pembayaran</th>
+                    <th style=text-align:right;>Tagihan</th>
+                    
+                    
                 </tr>
             </thead>       
                 <tbody>
@@ -58,16 +57,14 @@
                 $no = 1; foreach ($trans as $t): ?> 
                     <tr>
                         <td style=text-align:center;><?= $no++ ?>.</td>
-                        <td style=text-align:left;><?php echo $t->id_barang?></td>
-                        <td style=text-align:left;><?php echo $t->nama_produk?></td>
-                        <td style=text-align:left;><?php echo $t->kategori?></td>
-                        <td style=text-align:left;><?php echo $t->jenis?></td>
-                        <td style=text-align:left;><?php echo $t->satuan?></td>
-                        <td style=text-align:left;><?php echo $t->qty?></td>
-                        <td style=text-align:center;><?php echo $t->harga?></td>
-                        <td style=text-align:right;><?php echo $t->subtotal?></td>
+                        <td style=text-align:left;><?php echo $t->id_pembayaran?></td>
+                        <td style=text-align:left;><?php echo $t->tanggal_pembayaran?></td>
+                        <td style=text-align:left;><?php echo $t->potongan?></td>
+                        <td style=text-align:right;><?php echo $t->status?></td>
+                        <td style=text-align:right;><?php echo $t->total_tagihan?></td>
+                        
                     </tr>
-                    <?php $totalHarga += $t->subtotal; endforeach ?>      
+                    <?php $totalHarga += $t->total_tagihan; endforeach ?>      
                 </tbody>
                     <tr>         
                         <th style="text-align:right;" colspan="8">Total :</th>
@@ -88,8 +85,8 @@
        <div class="container">
             <table width="100%" cellspacing="0">
                 <tr>
-                    <th>Kode Pemesanan</th>
-                    <td>: <?php echo $id_pemesanan?></td>
+                    <th>Kode Pembayaram</th>
+                    <td>: <?php echo $id_pembayaran?></td>
                 </tr>
                 <!-- <tr>
                     <th>Nama Customers</th>
@@ -97,8 +94,8 @@
                 </tr> -->
                 <tr>
                     <th>Tanggal</th>
-                    <td>: <?php echo $tanggal?></td>
-                </tr>
+                    <td>: <?php echo $tanggal_pembayaran?></td>
+                </tr>                
                 <!-- <tr>
                     <th>Kasir</th>
                     <td>: <?= $this->session->userdata('username'); ?></td>

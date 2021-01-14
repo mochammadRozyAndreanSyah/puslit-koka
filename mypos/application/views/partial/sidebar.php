@@ -88,7 +88,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'pembayaran_barang' || $this->uri->segment(1) == 'data_pembayaran' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Pembayaran
@@ -97,30 +97,36 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../forms/general.html" class="nav-link">
+                <a href="<?php echo base_url("pembayaran_barang") ?>" class="nav-link <?= $this->uri->segment(1) == 'pembayaran_barang' ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>General Elements</p>
+                  <p>Pembayaran Barang</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url("data_pembayaran") ?>" class="nav-link <?= $this->uri->segment(1) == 'data_pembayaran' ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> Data Pembayaran Barang</p>
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'penjualan_harian' || $this->uri->segment(1) == 'penjualan_bulanan'  || $this->uri->segment(1) == 'grafik'? 'active' : '' ?>">
+            <a href="#" class="nav-link <?= $this->uri->segment(1) == 'penjualan_bulanan' || $this->uri->segment(1) == 'penjualan_tahunan'  || $this->uri->segment(1) == 'grafik'? 'active' : '' ?>">
               <i class="nav-icon fas fa fa-book"></i>
               <p>
                 Laporan
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo base_url("penjualan_harian") ?>" class="nav-link <?= $this->uri->segment(1) == 'penjualan_harian' ? 'active' : '' ?>"></i>
-                  <p>Penjualan harian</p>
-                </a>
-              </li>
+            <ul class="nav nav-treeview">              
               <li class="nav-item">
                 <a href="<?php echo base_url("penjualan_bulanan") ?>" class="nav-link <?= $this->uri->segment(1) == 'penjualan_bulanan' ? 'active' : '' ?>"></i>
                   <p>Penjualan Bulanan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url("penjualan_tahunan") ?>" class="nav-link <?= $this->uri->segment(1) == 'penjualan_tahunan' ? 'active' : '' ?>"></i>
+                  <p>Penjualan Tahunan</p>
                 </a>
               </li>
               <li class="nav-item">

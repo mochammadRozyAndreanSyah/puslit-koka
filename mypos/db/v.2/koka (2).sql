@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2021 at 02:37 PM
+-- Generation Time: Dec 08, 2020 at 02:00 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -44,26 +44,9 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_produk`, `jenis`, `kategori`, `satuan`, `harga`, `exp`, `stock`) VALUES
-('KK0001', 'Propelegitim BP 42 x', 'Kopi', 'Benih Robusta', 'Butir', 500, '2020-12-29', 10000),
-('KK0002', 'Hibiro 1', 'Kopi', 'Benih Robusta', 'Butir', 500, '2020-12-29', 10000),
-('KK0003', 'Hibiro 2', 'Kopi', 'Benih Robusta', 'Butir', 500, '2020-12-29', 10000),
-('KK0004', 'Hibiro 3', 'Kopi', 'Benih Robusta', 'Butir', 500, '2020-12-29', 10000),
-('KK0005', 'Lini S795', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0006', 'Abisinia 3', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0007', 'USDA 762', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0008', 'Andungsari 1', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0009', 'Sigararutang', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0010', 'Gayo 1', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0011', 'Gayo 2', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0012', 'Komasti', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0013', 'LIBTUKOM', 'Kopi', 'Benih Kopi Arabika/L', 'Butir', 500, '2020-12-29', 10000),
-('KK0014', 'ICCRI 06H', 'Kakao', 'Benih Kakao', 'Butir', 800, '2020-12-29', 12000),
-('KK0015', 'ICCRI 08H', 'Kakao', 'Benih Kakao', 'Butir', 500, '2020-12-29', 12000),
-('KK0016', 'MCC 02', 'Kakao', 'Bibit Kakao PCC', 'Batang', 6000, '2020-12-29', 12000),
-('KK0017', 'MCC 01', 'Kakao', 'Bibit Kakao PCC', 'Batang', 6000, '2020-12-29', 12000),
-('KK0018', 'SULAWESI 1', 'Kakao', 'Bibit Kakao PCC', 'Batang', 6000, '2020-12-29', 12000),
-('KK0019', 'SULAWESI 2', 'Kakao', 'Bibit Kakao PCC', 'Batang', 6000, '2020-12-29', 12000),
-('KK0020', 'ICCRI 09', 'Kakao', 'Bibit Kakao PCC', 'Batang', 6000, '2020-12-29', 12000);
+('KK0001', 'hibiro 1', 'Kopi', 'arabika', 'Butir', 500, '2020-10-19', 10000),
+('KK0002', 'hibiro 2', 'Kopi', 'liberika', 'Butir', 900, '2020-10-20', 120),
+('KK0003', 'hibiro 3', 'Kopi', 'liberika', 'Butir', 500, '2020-11-06', 10000);
 
 -- --------------------------------------------------------
 
@@ -137,21 +120,16 @@ CREATE TABLE `pembayaran` (
   `total_tagihan` int(11) DEFAULT NULL,
   `term_1` varchar(50) NOT NULL,
   `term_2` varchar(50) NOT NULL,
-  `term_3` varchar(50) NOT NULL,
-  `status` enum('Lunas','Belum Lunas') DEFAULT NULL
+  `term_3` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pembayaran`
 --
 
-INSERT INTO `pembayaran` (`id_pembayaran`, `tanggal_pembayaran`, `potongan`, `total_tagihan`, `term_1`, `term_2`, `term_3`, `status`) VALUES
-('kiku', '2020-12-15', 4, 5499996, 'Resep Mie Pangsit Khas Jember.jpg', '', '', NULL),
-('kjh', '2020-12-14', 2000, 226000, 'pecel4.jpg', '', '', 'Lunas'),
-('lk', '1970-01-01', 2000, 8109996, '', 'pecel4.jpg', '', NULL),
-('ll', '1970-01-01', 0, 0, '', 'pecel4.jpg', '', NULL),
-('niu', '2020-12-15', 20000, 208000, 'pecel4.jpg', 'pecel4.jpg', '', 'Lunas'),
-('pp', '1970-01-01', 0, 0, '', 'pecel4.jpg', 'pecel4.jpg', NULL);
+INSERT INTO `pembayaran` (`id_pembayaran`, `tanggal_pembayaran`, `potongan`, `total_tagihan`, `term_1`, `term_2`, `term_3`) VALUES
+('kiku', '2020-12-15', 4, 5499996, 'Resep_Mie_Pangsit_Khas_Jember.jpg', 'pecel4.jpg', 'miejiwo_101049629_258573461864967_2414588224721876'),
+('lk', '1970-01-01', 4, 8109996, 'pecel4.jpg', 'pecel4.jpg', 'pecel4.jpg');
 
 -- --------------------------------------------------------
 
@@ -182,26 +160,6 @@ INSERT INTO `pemesanan` (`id_pemesanan`, `id_customers`, `tanggal`, `total_harga
 ('luda', 'CS0001', '2020-11-06', 253000),
 ('momon', 'CS0001', '2020-11-06', 228000),
 ('po01', 'CS0002', '2020-11-12', 64500);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `id_user` varchar(4) NOT NULL,
-  `nama_user` varchar(30) DEFAULT NULL,
-  `username` varchar(30) DEFAULT NULL,
-  `password` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id_user`, `nama_user`, `username`, `password`) VALUES
-('US01', 'admin', 'admin', 'admin');
 
 --
 -- Indexes for dumped tables
